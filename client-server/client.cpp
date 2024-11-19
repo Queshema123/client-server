@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <string.h>
 
 #include <stdexcept>
 #include <iostream>
@@ -32,7 +33,10 @@ void Client::connectTo(const sockaddr_in& server_addr)
 
 void Client::sendMessage(const char* msg)
 {
-	int n = write(sockfd, msg, sizeof(msg));
+	if (!isConnect)
+		return;
+
+	int n = write(sockfd, msg, strlen(msg));
 	if (n < 0)
 	{
 		logError("Can't send message to Server in Client");

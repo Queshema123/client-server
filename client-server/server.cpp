@@ -77,6 +77,7 @@ void Server::clientInteraction(int client_socket)
 	int readed_bytes{ read(client_socket, buff, size) };
 	while (readed_bytes > 0 && client_socket > 0 && isListen)
 	{
+		buff[readed_bytes] = '\0';
 		addMessage(buff);
 		bzero(buff, size);
 		readed_bytes = read(client_socket, buff, size);
