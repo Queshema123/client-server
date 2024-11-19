@@ -4,5 +4,6 @@
 #pragma once
 
 #include <iostream>
+#include "server.h"
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
