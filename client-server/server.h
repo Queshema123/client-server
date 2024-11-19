@@ -23,6 +23,7 @@ public:
 	Server();
 	void start();
 	void end();
+	inline const sockaddr_in& getServerAdress() { return server_addr; }
 	~Server();
 };
 

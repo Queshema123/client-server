@@ -5,5 +5,6 @@
 
 #include <iostream>
 #include "server.h"
+#include "client.h"
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.

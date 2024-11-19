@@ -48,7 +48,6 @@ void Server::start()
 		std::thread client_connection(&Server::clientInteraction, this, newsocfd);
 		thread_pool.push_back(std::move(client_connection));
 	}
-	
 }
 
 void Server::end()
