@@ -74,12 +74,14 @@ void Server::clientInteraction(int client_socket)
 {
 	constexpr int size{ 256 };
 	char buff[size];
+	const char answer[] = "Success!";
 	int readed_bytes{ read(client_socket, buff, size) };
 	while (readed_bytes > 0 && client_socket > 0 && isListen)
 	{
 		buff[readed_bytes] = '\0';
 		addMessage(buff);
 		bzero(buff, size);
+		write(client_socket, answer, sizeof(answer));
 		readed_bytes = read(client_socket, buff, size);
 	}
 	close(client_socket);
