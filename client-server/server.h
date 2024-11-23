@@ -9,8 +9,11 @@
 #include <vector>
 #include <thread>
 
+#include "logger.h"
+
 class Server
 {
+	Logger errors, messages;
 	int sockfd, port, clients_cnt;
 	struct sockaddr_in server_addr;
 	bool isListen;

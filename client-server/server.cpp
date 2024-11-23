@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include <iostream>
 
-Server::Server() :
+Server::Server() : errors{"", "server_errors"}, messages{"", "server_messages"},
 	clients_cnt{ 5 }, port{ 9090 }, isListen{ false }
 {
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -62,12 +62,12 @@ Server::~Server()
 
 void Server::addMessage(const char* msg)
 {
-	std::cout << msg << '\n';
+	messages.log(msg, Logger::Tag::Message);
 }
 
 void Server::logError(const char* msg)
 {
-	std::cerr << msg << '\n';
+	errors.log(msg, Logger::Tag::Error);
 }
 
 void Server::clientInteraction(int client_socket)
