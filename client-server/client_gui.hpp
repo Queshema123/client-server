@@ -8,9 +8,10 @@ void start()
 	Client client;
 	client.connectTo(AF_INET, INADDR_ANY, 9090);
 	std::string msg;
-	while (!std::cin)
+	while (std::cin)
 	{
 		std::cout << '>';
-		std::cin >> msg;
+		std::getline(std::cin, msg);
+		std::cout << '>' << client.sendMessage(msg.c_str()) << '\n';
 	}
 }

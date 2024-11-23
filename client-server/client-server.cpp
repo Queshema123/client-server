@@ -2,7 +2,8 @@
 //
 
 #include "client-server.h"
-
+#include "client_gui.hpp"
+#include <thread>
 int main()
 {
 	
