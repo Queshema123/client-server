@@ -2,7 +2,7 @@
 #define _CLIENT_H_
 
 #include <netinet/in.h>
-
+#include <string>
 #include "logger.h"
 
 class Client
@@ -17,7 +17,7 @@ public:
 	Client();
 	void connectTo(const sockaddr_in& server_addr);
 	void connectTo(int family, int addr, int host_port);
-	void sendMessage(const char* msg);
+	std::string sendMessage(const char* msg);
 	~Client();
 };
 

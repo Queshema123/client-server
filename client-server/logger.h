@@ -7,7 +7,7 @@ class Logger
 {
 	std::string path, file_name;
 public:
-	Logger(const std::string& path = "", const std::string& fname) : path{ path }, file_name{ fname + ".xml"} { }
+	Logger(const std::string& path = "", const std::string& fname = "") : path{path}, file_name{fname + ".xml"} { }
 	~Logger() = default;
 
 	enum class Tag{ Message, Error };
