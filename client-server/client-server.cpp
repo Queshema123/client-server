@@ -6,6 +6,14 @@
 #include <thread>
 int main()
 {
-	
+	std::thread t(
+		[]()
+		{
+			Server s;
+			s.start();
+		}
+	);
+	start();
+	t.join();
 	return 0;
 }
