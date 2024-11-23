@@ -6,11 +6,10 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <stdexcept>
 #include <iostream>
 
 Client::Client() :
-	isConnect{false}
+	isConnect{false}, errors("", "client_errors")
 {
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0)
@@ -22,6 +21,23 @@ Client::Client() :
 
 void Client::connectTo(const sockaddr_in& server_addr)
 {
+	if (connect(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
+	{
+		logError("Can't connect to Server in Client");
+		isConnect = false;
+		return;
+	}
+	isConnect = true;
+}
+
+void Client::connectTo(int family, int addr, int host_port)
+{
+	struct sockaddr_in server_addr;
+	bzero((char*)&server_addr, sizeof(server_addr));
+	server_addr.sin_family = family;
+	server_addr.sin_addr.s_addr = family;
+	server_addr.sin_port = htons(host_port);
+
 	if (connect(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
 	{
 		logError("Can't connect to Server in Client");
@@ -51,5 +67,5 @@ Client::~Client()
 
 void Client::logError(const char* msg)
 {
-	std::cerr << msg << '\n';
+	errors.log(msg, Logger::Tag::Error);
 }
